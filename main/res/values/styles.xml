@@ -1,0 +1,14 @@
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <item name="android:actionBarStyle">@style/Theme.AppCompat.NoActionBar</item>
+    </style>
+
+
+    <style name="NoTitleText">
+        <item name="android:textSize">0sp</item>
+        <item name="android:textColor">#00000000</item>
+    </style>
+    <style name="MyActionButtonStyle" parent="Base.ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:minWidth">28dip</item>
+    </style>
+</resources>

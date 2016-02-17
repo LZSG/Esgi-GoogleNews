@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">GoogleNews</string>
+    <string name="last_news">last news</string>
+    <string name="news">news</string>
+    <string name="tag">tag</string>
+    <string name="refresh">refresh</string>
+    <string name="settings">Settings</string>
+
+    <string name="set_first_tag">set your first tag</string>
+</resources>
