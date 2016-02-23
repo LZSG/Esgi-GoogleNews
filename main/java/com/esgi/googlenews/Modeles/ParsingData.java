@@ -10,53 +10,23 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Created by zaafranigabriel on 21/01/2016.
+ *
  */
-public class ParsingData {
+public class ParsingData
+{
 
     private JSONObject jsonObject;
-    private Article article;
     private ArrayList<Article> listArticle = new ArrayList<>();
 
-    public JSONObject getJsonObject() {
-        return jsonObject;
-    }
-
-    public void setJsonObject(JSONObject jsonObject) {
-        this.jsonObject = jsonObject;
-    }
-
-    public Article getArticle() {
-        return article;
-    }
-
-    public void setArticle(Article article) {
-        this.article = article;
-    }
-
-    public ArrayList<Article> getListArticle() {
-        return listArticle;
-    }
-
-    public void setListArticle(ArrayList<Article> listArticle) {
-        this.listArticle = listArticle;
-    }
-
-    public ParsingData(){
-
-    }
-
-    private String remplaceEmpty(String data)
+    /**
+     * @param data string
+     *
+     * @throws JSONException
+     */
+    public ParsingData (String data) throws JSONException
     {
-        if(data.contains(" ")){
-           return data.replace(" ","+");
-        }
-        return data;
-    }
-
-    public ParsingData(String data) throws JSONException {
-        data = this.remplaceEmpty(data);
-        AsyncTask<String,Void,JSONObject> jsonObjectVar= new DataApi().execute(data);
+        data = this.escapeSpace(data);
+        AsyncTask<String, Void, JSONObject> jsonObjectVar = new DataApi().execute(data);
         try {
             this.jsonObject = jsonObjectVar.get();
         } catch (InterruptedException e) {
@@ -64,26 +34,60 @@ public class ParsingData {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        JSONObject json2 = null;
+
+        JSONObject json = null;
         try {
-            json2 = (JSONObject) this.jsonObject.get("responseData");
+            json = (JSONObject) this.jsonObject.get("responseData");
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         JSONArray jsonArr = null;
         try {
-            jsonArr = json2.getJSONArray("results");
+            jsonArr = json.getJSONArray("results");
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+        Article article;
         for (int i = 0; i < jsonArr.length(); i++) {
-            JSONObject jsonObjet =(JSONObject) jsonArr.getJSONObject(i).get("image");
+            String imageUrl = null;
+            if (jsonArr.getJSONObject(i).has("image")) {
+                JSONObject jsonObject;
+                jsonObject = (JSONObject) jsonArr.getJSONObject(i).get("image");
 
-            article = new Article(jsonArr.getJSONObject(i).get("titleNoFormatting").toString(),jsonArr.getJSONObject(i).get("content").toString(),jsonArr.getJSONObject(i).get("url").toString(),jsonObjet.get("tbUrl").toString(),0,jsonArr.getJSONObject(i).get("publishedDate").toString());
-            listArticle.add(article);
+                imageUrl = jsonObject.get("tbUrl").toString();
+            }
+
+            article = new Article(
+                    jsonArr.getJSONObject(i).get("titleNoFormatting").toString(),
+                    jsonArr.getJSONObject(i).get("content").toString(),
+                    jsonArr.getJSONObject(i).get("url").toString(),
+                    imageUrl,
+                    0,
+                    jsonArr.getJSONObject(i).get("publishedDate").toString());
+
+            this.listArticle.add(article);
         }
     }
 
+    /**
+     * @param data string
+     *
+     * @return string
+     */
+    private String escapeSpace (String data)
+    {
+        String regex = " ";
+        data = data.replaceAll(regex, "%20");
+        return data;
+    }
 
+    /**
+     * @return
+     */
+    public ArrayList<Article> getListArticle ()
+    {
+        return listArticle;
+    }
 }

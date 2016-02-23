@@ -8,7 +8,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * Created by zaafranigabriel on 19/02/2016.
+ * Save file
  */
 public class SaveFile extends AsyncTask<String,Void,String> {
     @Override
@@ -16,8 +16,8 @@ public class SaveFile extends AsyncTask<String,Void,String> {
         StringBuilder content = new StringBuilder();
         try
         {
-            // create a url object
-            URL url = new URL(params[0]);
+            String spec = params[0];
+            URL url = new URL(spec);
             URLConnection urlConnection = url.openConnection();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
             String line;
