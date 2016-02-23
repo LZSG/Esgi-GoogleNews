@@ -1,144 +1,169 @@
 package com.esgi.googlenews.Modeles;
 
 /**
- * Created by zaafranigabriel on 21/01/2016.
+ * Article object
  */
-public class Article {
+public class Article
+{
 
-    private int idArticle;
-    private String titleArticle;
     private String contentArticle;
+    private String titleArticle;
     private String urlArticle;
     private String urlPicture;
-    private int downloadPicture;
     private String dateArticle;
+
+    private int downloadPicture;
     private int idFlagArticle;
+    private int idArticle;
 
-    private MyDbHelper db;
-
-    public Article(int idArticle,String titleArticle, String contentArticle, String urlArticle, String urlPicture, int downloadPicture,String dateArticle,int idFlagArticle) {
+    /**
+     *
+     * @param idArticle
+     * @param titleArticle
+     * @param contentArticle
+     * @param urlArticle
+     * @param urlPicture
+     * @param downloadPicture
+     * @param dateArticle
+     * @param idFlagArticle
+     */
+    public Article (int idArticle, String titleArticle, String contentArticle, String urlArticle, String urlPicture, int downloadPicture, String dateArticle, int idFlagArticle)
+    {
+        this(titleArticle, contentArticle, urlArticle, urlPicture, downloadPicture, dateArticle, idFlagArticle);
         this.idArticle = idArticle;
+    }
+
+    /**
+     *
+     * @param titleArticle
+     * @param contentArticle
+     * @param urlArticle
+     * @param urlPicture
+     * @param downloadPicture
+     * @param dateArticle
+     * @param idFlagArticle
+     */
+    public Article (String titleArticle, String contentArticle, String urlArticle, String urlPicture, int downloadPicture, String dateArticle, int idFlagArticle)
+    {
+        this(titleArticle, contentArticle, urlArticle, urlPicture, downloadPicture, dateArticle);
+        this.idFlagArticle = idFlagArticle;
+    }
+
+    /**
+     *
+     * @param titleArticle
+     * @param contentArticle
+     * @param urlArticle
+     * @param urlPicture
+     * @param downloadPicture
+     * @param dateArticle
+     */
+    public Article (String titleArticle, String contentArticle, String urlArticle, String urlPicture, int downloadPicture, String dateArticle)
+    {
         this.titleArticle = titleArticle;
         this.contentArticle = contentArticle;
         this.urlArticle = urlArticle;
         this.urlPicture = urlPicture;
         this.downloadPicture = downloadPicture;
         this.dateArticle = dateArticle;
-        this.idFlagArticle = idFlagArticle;
     }
 
-    public Article(String titleArticle, String contentArticle, String urlArticle, String urlPicture,int downloadPicture, String dateArticle,int idFlagArticle) {
-        this.titleArticle = titleArticle;
-        this.contentArticle = contentArticle;
-        this.urlArticle = urlArticle;
-        this.urlPicture = urlPicture;
-        this.downloadPicture = downloadPicture;
-        this.dateArticle = dateArticle;
-        this.idFlagArticle = idFlagArticle;
-    }
-
-    public Article(String titleArticle, String contentArticle, String urlArticle, String urlPicture,int downloadPicture, String dateArticle)
+    /**
+     * Get the Picture  TODO:
+     * @return int downloadPicture
+     */
+    public int getDownloadPicture ()
     {
-        this.titleArticle = titleArticle;
-        this.contentArticle = contentArticle;
-        this.urlArticle = urlArticle;
-        this.urlPicture = urlPicture;
-        this.downloadPicture=downloadPicture;
-        this.dateArticle = dateArticle;
-    }
-
-    public Article()
-    {
-
-    }
-
-    public int getDownloadPicture() {
         return downloadPicture;
     }
 
-    public void setDownloadPicture(int downloadPicture) {
-        this.downloadPicture = downloadPicture;
-    }
-
-    public Article(int idFlagArticle)
+    /**
+     * Get id of the Article use in DatabaseHelper
+     *
+     * @return idArticle int
+     */
+    public int getIdArticle ()
     {
-        this.idFlagArticle = idFlagArticle;
-    }
-
-    public Article(MyDbHelper db)
-    {
-        this.db = db;
-    }
-
-
-
-    public int getIdArticle() {
         return idArticle;
     }
 
-    public void setIdArticle(int idArticle) {
-        this.idArticle = idArticle;
-    }
-
-    public String getTitleArticle() {
+    /**
+     * Get Title of the Article
+     *
+     * @return titleArticle string
+     */
+    public String getTitleArticle ()
+    {
         return titleArticle;
     }
 
-    public void setTitleArticle(String titleArticle) {
-        this.titleArticle = titleArticle;
-    }
-
-    public String getContentArticle() {
+    /**
+     * Get Content of the Article
+     *
+     * @return contentArticle string
+     */
+    public String getContentArticle ()
+    {
         return contentArticle;
     }
 
-    public void setContentArticle(String contentArticle) {
-        this.contentArticle = contentArticle;
-    }
-
-    public String getUrlArticle() {
+    /**
+     * Get Url of the Article
+     *
+     * @return urlArticle string
+     */
+    public String getUrlArticle ()
+    {
         return urlArticle;
     }
 
-    public void setUrlArticle(String urlArticle) {
-        this.urlArticle = urlArticle;
-    }
-
-    public int getIdFlagArticle() {
+    /**
+     * Get the id Flag link to article
+     *
+     * @return idFlagArticle int
+     */
+    public int getIdFlagArticle ()
+    {
         return idFlagArticle;
     }
 
-    public void setIdFlagArticle(int idFlagArticle) {
+    /**
+     * Set the id Flag link to article
+     *
+     * @param idFlagArticle int
+     */
+    public void setIdFlagArticle (int idFlagArticle)
+    {
         this.idFlagArticle = idFlagArticle;
     }
 
-    public String getUrlPicture() {
+    /**
+     * Get Url of the Picture
+     *
+     * @return urlPicture string
+     */
+    public String getUrlPicture ()
+    {
         return urlPicture;
     }
 
-    public void setUrlPicture(String urlPicture) {
-        this.urlPicture = urlPicture;
-    }
-
-    public String getDateArticle()
+    /**
+     * Get release date
+     *
+     * @return dateArticle string
+     */
+    public String getDateArticle ()
     {
         return dateArticle;
     }
 
-    public void setDateArticle(String dateArticle){
-        this.dateArticle = dateArticle;
-    }
-
-    public MyDbHelper getDb() {
-        return db;
-    }
-
-    public void setDb(MyDbHelper db) {
-        this.db = db;
-    }
-
+    /**
+     * to String
+     * @return a string on JsonFormat
+     */
     @Override
-    public String toString() {
+    public String toString ()
+    {
         return "Article{" +
                 "idArticle=" + idArticle +
                 ", titleArticle='" + titleArticle + '\'' +
