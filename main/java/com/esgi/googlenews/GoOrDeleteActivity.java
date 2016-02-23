@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.esgi.googlenews.Modeles.MyDbHelper;
 
-public class GoOrDelete extends AppCompatActivity {
+public class GoOrDeleteActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,9 +21,9 @@ public class GoOrDelete extends AppCompatActivity {
         final Intent intent = getIntent();
         final String value = intent.getStringExtra("flag");
         if(value==null){
-            Toast.makeText(GoOrDelete.this,"the flag is null ",Toast.LENGTH_SHORT).show();
+            Toast.makeText(GoOrDeleteActivity.this,"the flag is null ",Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(GoOrDelete.this,"the flag is "+value,Toast.LENGTH_SHORT).show();
+            Toast.makeText(GoOrDeleteActivity.this,"the flag is "+value,Toast.LENGTH_SHORT).show();
         }
 
         Button btnView = (Button)findViewById(R.id.btnGo);
@@ -32,7 +32,7 @@ public class GoOrDelete extends AppCompatActivity {
         btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(GoOrDelete.this,DisplayArticles.class);
+                Intent intent1 = new Intent(GoOrDeleteActivity.this,DisplayArticlesActivity.class);
                 intent1.putExtra("flag",value);
                 startActivity(intent1);
             }
@@ -42,11 +42,11 @@ public class GoOrDelete extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(deleteArticles(value)){
-                    Toast.makeText(GoOrDelete.this,"The articles are deleted ",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GoOrDeleteActivity.this,"The articles are deleted ",Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(GoOrDelete.this,"The articles don't was exists ",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GoOrDeleteActivity.this,"The articles don't was exists ",Toast.LENGTH_SHORT).show();
                 }
-                Intent intent1 = new Intent(GoOrDelete.this,MainActivity.class);
+                Intent intent1 = new Intent(GoOrDeleteActivity.this,MainActivity.class);
                 startActivity(intent1);
             }
         });

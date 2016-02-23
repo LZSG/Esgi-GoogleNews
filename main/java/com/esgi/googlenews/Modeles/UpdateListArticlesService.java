@@ -11,31 +11,34 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
+
 /**
- * Created by zaafranigabriel on 21/02/2016.
+ * Service of Synchronize all Article by Flag data to get new Article
  */
-public class MyService extends Service {
+public class UpdateListArticlesService extends Service
+{
     @Nullable
     @Override
-    public IBinder onBind(Intent intent) {
+    public IBinder onBind (Intent intent)
+    {
         return null;
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        
+    public int onStartCommand (Intent intent, int flags, int startId)
+    {
         Toast.makeText(this, "Service update Flag Started", Toast.LENGTH_LONG).show();
-        ArrayList<Flag> listeFlag = getAllflags();
-        if(listeFlag==null || listeFlag.size()==0){
+        ArrayList<Flag> listFlag = getAllFlags();
+        if (listFlag == null || listFlag.size() == 0) {
             Toast.makeText(this, "Nothing flags exist", Toast.LENGTH_LONG).show();
             onDestroy();
-        }else{
-            for(int i = 0;i<listeFlag.size();i++){
+        } else {
+            for (int i = 0; i < listFlag.size(); i++) {
                 try {
-                    if (listeFlag.get(i).getName() != null) {
-                        getAndInsertArticle(listeFlag.get(i).getName());
+                    if (listFlag.get(i).getName() != null) {
+                        getAndInsertArticle(listFlag.get(i).getName());
                     }
-                }catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -46,19 +49,27 @@ public class MyService extends Service {
     }
 
     @Override
-    public void onDestroy() {
+    public void onDestroy ()
+    {
         super.onDestroy();
         Toast.makeText(this, "Service Destroyed", Toast.LENGTH_LONG).show();
     }
 
-
-    private ArrayList<Flag> getAllflags(){
+    /**
+     *
+     * @return
+     */
+    private ArrayList<Flag> getAllFlags ()
+    {
         MyDbHelper dbHelper = new MyDbHelper(this);
         return dbHelper.getAllFlags();
     }
 
-
-    private void getAndInsertArticle(String nameFlag)
+    /**
+     *
+     * @param nameFlag
+     */
+    private void getAndInsertArticle (String nameFlag)
     {
         ParsingData dataParse = null;
         try {
@@ -66,20 +77,17 @@ public class MyService extends Service {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        ArrayList<Article> liste = dataParse.getListArticle();
-
+        ArrayList<Article> list = dataParse.getListArticle();
 
         MyDbHelper db = new MyDbHelper(this);
 
         int id = db.getIDFlag(nameFlag);
-        Log.d("flag-id", Integer.toString(id));
-        for(int i = 0;i<liste.size();i++)
-        {
-            liste.get(i).setIdFlagArticle(id);
-            if(db.addArticle(liste.get(i))){
-                Toast.makeText(getApplicationContext(),"the article is insert ",Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(getApplicationContext(),"Error article is not insert or exist ",Toast.LENGTH_SHORT).show();
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).setIdFlagArticle(id);
+            if (db.addArticle(list.get(i))) {
+                Toast.makeText(getApplicationContext(), "the article is insert ", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "Error article is not insert or exist ", Toast.LENGTH_SHORT).show();
             }
         }
     }

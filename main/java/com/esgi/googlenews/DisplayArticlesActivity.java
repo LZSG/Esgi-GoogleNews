@@ -35,7 +35,7 @@ import com.esgi.googlenews.Modeles.DownloadPicture;
 import com.esgi.googlenews.Modeles.MyDbHelper;
 import com.esgi.googlenews.Modeles.ParsingData;
 
-public class DisplayArticles extends AppCompatActivity {
+public class DisplayArticlesActivity extends AppCompatActivity {
     ListView listView;
     String fml;
     ArticleAdapter adapter;
@@ -92,7 +92,7 @@ public class DisplayArticles extends AppCompatActivity {
                             url = url.replace("%2F","/");
                         }
                         Log.d("URL", url);
-                        Intent intent = new Intent(DisplayArticles.this,choose.class);
+                        Intent intent = new Intent(DisplayArticlesActivity.this,ChooseActivity.class);
                         intent.putExtra("URL",url);
                         startActivity(intent);
                     }
@@ -177,9 +177,9 @@ public class DisplayArticles extends AppCompatActivity {
                     }
                     if(this.writeBitmap(idArticle+".png",btm))
                     {
-                        Toast.makeText(DisplayArticles.this,"The file is insert",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DisplayArticlesActivity.this,"The file is insert",Toast.LENGTH_SHORT).show();
                     }else{
-                        Toast.makeText(DisplayArticles.this,"ERROR not insert",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DisplayArticlesActivity.this,"ERROR not insert",Toast.LENGTH_SHORT).show();
                         break;
                     }
                 }

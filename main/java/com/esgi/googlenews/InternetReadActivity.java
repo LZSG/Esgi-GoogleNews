@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutionException;
 
 import com.esgi.googlenews.Modeles.SaveFile;
 
-public class InternetRead extends AppCompatActivity {
+public class InternetReadActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +31,10 @@ public class InternetRead extends AppCompatActivity {
             try {
                 String val = objectAsync.get();
                 if(val==null){
-                    Toast.makeText(InternetRead.this,"Erreur of URL",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InternetReadActivity.this,"Erreur of URL",Toast.LENGTH_SHORT).show();
                 }else{
                     if(this.writeToFile(tabVal[tabVal.length-1],val)){
-                        Toast.makeText(InternetRead.this,"Writed success",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(InternetReadActivity.this,"Writed success",Toast.LENGTH_SHORT).show();
                     }
                 }
             } catch (InterruptedException e) {

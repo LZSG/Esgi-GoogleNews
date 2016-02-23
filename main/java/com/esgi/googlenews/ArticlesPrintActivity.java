@@ -25,7 +25,7 @@ import com.esgi.googlenews.Modeles.DownloadPicture;
 import com.esgi.googlenews.Modeles.MyDbHelper;
 import com.esgi.googlenews.Modeles.ParsingData;
 
-public class ArticlesPrint extends AppCompatActivity {
+public class ArticlesPrintActivity extends AppCompatActivity {
     String fml;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class ArticlesPrint extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                try {
-                   Intent intent = new Intent(ArticlesPrint.this, DisplayArticles.class);
+                   Intent intent = new Intent(ArticlesPrintActivity.this, DisplayArticlesActivity.class);
                    intent.putExtra("flag",fml);
                    startActivity(intent);
                }catch (Exception e){
@@ -105,9 +105,9 @@ public class ArticlesPrint extends AppCompatActivity {
                     }
                     if(this.writeBitmap(idArticle+".png",btm))
                     {
-                        Toast.makeText(ArticlesPrint.this,"The file is insert",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ArticlesPrintActivity.this,"The file is insert",Toast.LENGTH_SHORT).show();
                     }else{
-                        Toast.makeText(ArticlesPrint.this,"ERROR not insert",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ArticlesPrintActivity.this,"ERROR not insert",Toast.LENGTH_SHORT).show();
                         break;
                     }
                 }

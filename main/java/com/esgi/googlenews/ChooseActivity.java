@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class choose extends AppCompatActivity {
+public class ChooseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +22,8 @@ public class choose extends AppCompatActivity {
         btnOnline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(choose.this,"click Online "+url,Toast.LENGTH_SHORT).show();
-                Intent intent1 = new Intent(choose.this,InternetRead.class);
+                Toast.makeText(ChooseActivity.this,"click Online "+url,Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(ChooseActivity.this,InternetReadActivity.class);
                 intent1.putExtra("URL",url);
                 startActivity(intent1);
             }
@@ -32,8 +32,8 @@ public class choose extends AppCompatActivity {
         btnOffline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(choose.this,"Click Offline "+url,Toast.LENGTH_SHORT).show();
-                Intent intent1 = new Intent(choose.this,InternetReadOffLine.class);
+                Toast.makeText(ChooseActivity.this,"Click Offline "+url,Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(ChooseActivity.this,InternetReadOffLineActivity.class);
                 intent1.putExtra("URL",url);
                 startActivity(intent1);
             }

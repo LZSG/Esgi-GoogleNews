@@ -10,8 +10,8 @@ public class Flag
 
     /**
      *
-     * @param id
-     * @param name
+     * @param id int
+     * @param name string
      */
     public Flag (int id, String name)
     {

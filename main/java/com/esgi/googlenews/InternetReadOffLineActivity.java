@@ -13,7 +13,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class InternetReadOffLine extends AppCompatActivity {
+public class InternetReadOffLineActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class InternetReadOffLine extends AppCompatActivity {
                 e.printStackTrace();
             }
         }else{
-            Toast.makeText(InternetReadOffLine.this,"FILE NOT EXIST ",Toast.LENGTH_SHORT).show();
+            Toast.makeText(InternetReadOffLineActivity.this,"FILE NOT EXIST ",Toast.LENGTH_SHORT).show();
         }
 
     }

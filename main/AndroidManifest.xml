@@ -19,11 +19,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.esgi.googlenews.Modeles.ihmActivity"
+            android:name=".IhmActivity"
             android:label="@string/title_activity_ihm" >
         </activity>
         <activity
-            android:name="com.esgi.googlenews.ArticlesPrint"
+            android:name=".ArticlesPrintActivity"
             android:label="@string/title_activity_articles_print" >
             <intent-filter>
                 <action android:name="com.scytec.datamobile.vd.gui.android.AppPreferenceActivity" />
@@ -32,26 +32,26 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.esgi.googlenews.DisplayArticles"
+            android:name=".DisplayArticlesActivity"
             android:label="@string/title_activity_display_articles" >
         </activity>
         <activity
-            android:name="com.esgi.googlenews.choose"
+            android:name=".ChooseActivity"
             android:label="@string/title_activity_choose" >
         </activity>
         <activity
-            android:name="com.esgi.googlenews.InternetRead"
+            android:name=".InternetReadActivity"
             android:label="@string/title_activity_internet_read" >
         </activity>
         <activity
-            android:name="com.esgi.googlenews.InternetReadOffLine"
+            android:name=".InternetReadOffLineActivity"
             android:label="@string/title_activity_internet_read_off_line" >
         </activity>
         <activity
-            android:name="com.esgi.googlenews.GoOrDelete"
+            android:name=".GoOrDeleteActivity"
             android:label="@string/title_activity_go_or_delete" >
         </activity>
-        <service android:name="com.esgi.googlenews.Modeles.MyService" />
+        <service android:name=".Modeles.UpdateListArticlesService" />
     </application>
 
 </manifest>

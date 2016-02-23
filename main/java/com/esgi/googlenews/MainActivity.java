@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -33,7 +32,7 @@ import com.esgi.googlenews.Modeles.Article;
 import com.esgi.googlenews.Modeles.DownloadPicture;
 import com.esgi.googlenews.Modeles.Flag;
 import com.esgi.googlenews.Modeles.MyDbHelper;
-import com.esgi.googlenews.Modeles.MyService;
+import com.esgi.googlenews.Modeles.UpdateListArticlesService;
 import com.esgi.googlenews.Modeles.ParsingData;
 
 public class MainActivity extends Activity {
@@ -56,7 +55,7 @@ public class MainActivity extends Activity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startService(new Intent(MainActivity.this, MyService.class));
+                startService(new Intent(MainActivity.this, UpdateListArticlesService.class));
             }
         });
 
@@ -100,7 +99,7 @@ public class MainActivity extends Activity {
                                        public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
                                            try {
                                                TextView v = (TextView) view;
-                                               Intent in = new Intent(MainActivity.this, GoOrDelete.class);
+                                               Intent in = new Intent(MainActivity.this, GoOrDeleteActivity.class);
                                                in.putExtra("flag", v.getText());
                                                startActivity(in);
                                            } catch (Exception e) {

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Created by zaafranigabriel on 21/01/2016.
+ *
  */
 public class ParsingData {
 
@@ -46,7 +46,7 @@ public class ParsingData {
 
     }
 
-    private String remplaceEmpty(String data)
+    private String replaceEmpty (String data)
     {
         if(data.contains(" ")){
            return data.replace(" ","+");
@@ -55,7 +55,7 @@ public class ParsingData {
     }
 
     public ParsingData(String data) throws JSONException {
-        data = this.remplaceEmpty(data);
+        data = this.replaceEmpty(data);
         AsyncTask<String,Void,JSONObject> jsonObjectVar= new DataApi().execute(data);
         try {
             this.jsonObject = jsonObjectVar.get();
@@ -64,26 +64,30 @@ public class ParsingData {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        JSONObject json2 = null;
+        JSONObject json = null;
         try {
-            json2 = (JSONObject) this.jsonObject.get("responseData");
+            json = (JSONObject) this.jsonObject.get("responseData");
         } catch (JSONException e) {
             e.printStackTrace();
         }
         JSONArray jsonArr = null;
         try {
-            jsonArr = json2.getJSONArray("results");
+            jsonArr = json.getJSONArray("results");
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         for (int i = 0; i < jsonArr.length(); i++) {
-            JSONObject jsonObjet =(JSONObject) jsonArr.getJSONObject(i).get("image");
+            JSONObject jsonObject =(JSONObject) jsonArr.getJSONObject(i).get("image");
 
-            article = new Article(jsonArr.getJSONObject(i).get("titleNoFormatting").toString(),jsonArr.getJSONObject(i).get("content").toString(),jsonArr.getJSONObject(i).get("url").toString(),jsonObjet.get("tbUrl").toString(),0,jsonArr.getJSONObject(i).get("publishedDate").toString());
+            article = new Article(
+                    jsonArr.getJSONObject(i).get("titleNoFormatting").toString(),
+                    jsonArr.getJSONObject(i).get("content").toString(),
+                    jsonArr.getJSONObject(i).get("url").toString(),
+                    jsonObject.get("tbUrl").toString(),
+                    0,
+                    jsonArr.getJSONObject(i).get("publishedDate").toString());
             listArticle.add(article);
         }
     }
-
-
 }
