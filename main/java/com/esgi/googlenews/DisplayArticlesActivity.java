@@ -220,6 +220,7 @@ public class DisplayArticlesActivity extends BaseActivity
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         ArrayList<Article> list = dataParse.getListArticle();
 
         DbHelper db = new DbHelper(this);

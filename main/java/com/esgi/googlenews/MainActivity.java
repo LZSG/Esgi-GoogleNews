@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -29,7 +30,6 @@ import com.esgi.googlenews.Modeles.Article;
 import com.esgi.googlenews.Modeles.DownloadPicture;
 import com.esgi.googlenews.Modeles.Flag;
 import com.esgi.googlenews.Modeles.DbHelper;
-import com.esgi.googlenews.Modeles.UpdateListArticlesService;
 import com.esgi.googlenews.Modeles.ParsingData;
 
 public class MainActivity extends BaseActivity
@@ -41,24 +41,6 @@ public class MainActivity extends BaseActivity
         setContentView(R.layout.activity_main);
         FlagListView();
         addButtonClickListener();
-        addButtonClickListenerService();
-    }
-
-
-    /**
-     *
-     */
-    public void addButtonClickListenerService() {
-        Button btn = (Button) findViewById(R.id.btnService);
-        btn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick (View v)
-            {
-                startService(new Intent(MainActivity.this, UpdateListArticlesService.class));
-            }
-        });
-
     }
 
     /**
@@ -66,14 +48,21 @@ public class MainActivity extends BaseActivity
      */
     public void addButtonClickListener() {
 
-        Button btn = (Button) findViewById(R.id.button);
+        Button btn = (Button) findViewById(R.id.buttonAddFlag);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Click on button", Toast.LENGTH_SHORT).show();
-                EditText textEdit = (EditText) findViewById(R.id.flag);
-                add(textEdit.getText().toString());
+                EditText editText = (EditText) findViewById(R.id.field_flag);
+                add(editText.getText().toString());
                 FlagListView();
+                /** Clear Focus */
+                View view = MainActivity.this.getCurrentFocus();
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+                editText.clearFocus();
             }
         });
     }

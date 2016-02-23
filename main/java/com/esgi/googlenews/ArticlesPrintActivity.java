@@ -33,14 +33,14 @@ public class ArticlesPrintActivity extends BaseActivity
         fml = intent.getStringExtra("flag");
         try {
             getAndInsertArticle(fml);
-            getArticleFromdb(fml);
+            getArticleFromDb(fml);
             saveImage(fml);
         }catch (Exception e){
             e.printStackTrace();
         }
-        addButtonClickListner();
+        addButtonClickListener();
     }
-    public void addButtonClickListner(){
+    public void addButtonClickListener (){
         Button btnValidator = (Button)findViewById(R.id.button2);
         btnValidator.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,11 +60,11 @@ public class ArticlesPrintActivity extends BaseActivity
     public void saveImage(String value)
     {
         try {
-            ArrayList<Article>  liste = this.getArticleFromdb(value);
-            for (int i = 0; i < liste.size(); i++) {
+            ArrayList<Article>  list = this.getArticleFromDb(value);
+            for (int i = 0; i < list.size(); i++) {
 
-                String idArticle = Integer.toString(liste.get(i).getIdArticle());
-                String url = liste.get(i).getUrlPicture().toString();
+                String idArticle = Integer.toString(list.get(i).getIdArticle());
+                String url = list.get(i).getUrlPicture().toString();
                 if(this.fileExist(idArticle+".png")==false) {
                     AsyncTask<String, Void, Bitmap> bimapPics = new DownloadPicture().execute(url);
                     Bitmap btm = null;
@@ -103,9 +103,9 @@ public class ArticlesPrintActivity extends BaseActivity
             Bitmap bitmap = bm;
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
-            byte[] bitmapdata = bos.toByteArray();
+            byte[] bitmapData = bos.toByteArray();
             try {
-                fos.write(bitmapdata);
+                fos.write(bitmapData);
                 fos.flush();
                 fos.close();
                 return  true;
@@ -121,7 +121,7 @@ public class ArticlesPrintActivity extends BaseActivity
         return false;
     }
 
-    public ArrayList<Article> getArticleFromdb(String value){
+    public ArrayList<Article> getArticleFromDb (String value){
 
         DbHelper db = new DbHelper(this);
         int id = db.getIDFlag(value);
@@ -142,17 +142,17 @@ public class ArticlesPrintActivity extends BaseActivity
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        ArrayList<Article> liste = dataParse.getListArticle();
+        ArrayList<Article> list = dataParse.getListArticle();
 
 
         DbHelper db = new DbHelper(this);
 
         int id = db.getIDFlag(nameFlag);
         Log.d("flag-id", Integer.toString(id));
-        for(int i = 0;i<liste.size();i++)
+        for(int i = 0;i<list.size();i++)
         {
-            liste.get(i).setIdFlagArticle(id);
-            if(db.addArticle(liste.get(i))){
+            list.get(i).setIdFlagArticle(id);
+            if(db.addArticle(list.get(i))){
                 Toast.makeText(getApplicationContext(),"the article is insert ",Toast.LENGTH_SHORT).show();
             }else{
                 Toast.makeText(getApplicationContext(),"Error article is not insert or exist ",Toast.LENGTH_SHORT).show();

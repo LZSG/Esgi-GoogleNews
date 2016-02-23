@@ -1,8 +1,11 @@
 package com.esgi.googlenews;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.esgi.googlenews.Modeles.UpdateListArticlesService;
 
 public class BaseActivity extends AppCompatActivity
 {
@@ -15,12 +18,19 @@ public class BaseActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+        switch (item.getItemId()){
+            case R.id.action_manual_update:
+                this.updateArticles();
+                break;
 
-        if (id == R.id.action_settings) {
-            return true;
+            case R.id.action_settings:
+            default:
+                break;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    private void updateArticles() {
+        startService(new Intent(this, UpdateListArticlesService.class));
     }
 }

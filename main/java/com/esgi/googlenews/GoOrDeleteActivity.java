@@ -35,15 +35,17 @@ public class GoOrDeleteActivity extends BaseActivity {
             }
         });
 
-        btnDelete.setOnClickListener(new View.OnClickListener() {
+        btnDelete.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                if(deleteArticles(value)){
-                    Toast.makeText(GoOrDeleteActivity.this,"The articles are deleted ",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(GoOrDeleteActivity.this,"The articles don't was exists ",Toast.LENGTH_SHORT).show();
+            public void onClick (View v)
+            {
+                if (deleteArticles(value)) {
+                    Toast.makeText(GoOrDeleteActivity.this, "The articles are deleted ", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(GoOrDeleteActivity.this, "The articles don't was exists ", Toast.LENGTH_SHORT).show();
                 }
-                Intent intent1 = new Intent(GoOrDeleteActivity.this,MainActivity.class);
+                Intent intent1 = new Intent(GoOrDeleteActivity.this, MainActivity.class);
                 startActivity(intent1);
             }
         });
@@ -52,9 +54,6 @@ public class GoOrDeleteActivity extends BaseActivity {
 
     private Boolean deleteArticles(String value){
         DbHelper dbh = new DbHelper(this);
-        if(dbh.deleteArticlesAndFlag(value)) {
-            return true;
-        }
-        return false;
+        return dbh.deleteArticlesAndFlag(value);
     }
 }
