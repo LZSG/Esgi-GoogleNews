@@ -1,14 +1,11 @@
 package com.esgi.googlenews;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,7 +32,8 @@ import com.esgi.googlenews.Modeles.DbHelper;
 import com.esgi.googlenews.Modeles.UpdateListArticlesService;
 import com.esgi.googlenews.Modeles.ParsingData;
 
-public class MainActivity extends Activity {
+public class MainActivity extends BaseActivity
+{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +50,11 @@ public class MainActivity extends Activity {
      */
     public void addButtonClickListenerService() {
         Button btn = (Button) findViewById(R.id.btnService);
-        btn.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick (View v)
+            {
                 startService(new Intent(MainActivity.this, UpdateListArticlesService.class));
             }
         });
@@ -113,12 +113,12 @@ public class MainActivity extends Activity {
 
     public void saveImage(String value) {
         try {
-            ArrayList<Article> liste = this.getArticleFromDb(value);
-            for (int i = 0; i < liste.size(); i++) {
+            ArrayList<Article> list = this.getArticleFromDb(value);
+            for (int i = 0; i < list.size(); i++) {
 
-                String idArticle = Integer.toString(liste.get(i).getIdArticle());
-                String url = liste.get(i).getUrlPicture().toString();
-                if (this.fileExist(idArticle + ".png") == false) {
+                String idArticle = Integer.toString(list.get(i).getIdArticle());
+                String url = list.get(i).getUrlPicture().toString();
+                if (!this.fileExist(idArticle + ".png")) {
                     AsyncTask<String, Void, Bitmap> bitmapPics = new DownloadPicture().execute(url);
                     Bitmap btm = null;
                     try {
@@ -143,8 +143,8 @@ public class MainActivity extends Activity {
     }
 
 
-    public boolean fileExist(String fname) {
-        File file = getBaseContext().getFileStreamPath(fname);
+    public boolean fileExist(String fileName) {
+        File file = getBaseContext().getFileStreamPath(fileName);
         return file.exists();
     }
 
@@ -155,9 +155,9 @@ public class MainActivity extends Activity {
             Bitmap bitmap = bm;
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
-            byte[] bitmapdata = bos.toByteArray();
+            byte[] bitmapData = bos.toByteArray();
             try {
-                fos.write(bitmapdata);
+                fos.write(bitmapData);
                 fos.flush();
                 fos.close();
                 return true;
@@ -195,19 +195,19 @@ public class MainActivity extends Activity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        ArrayList<Article> liste = dataParse.getListArticle();
-        for (int i = 0; i < liste.size(); i++) {
-            Log.d("title n° " + i, liste.get(i).getTitleArticle());
-            Log.d("url n° " + i, liste.get(i).getUrlArticle());
+        ArrayList<Article> list = dataParse.getListArticle();
+        for (int i = 0; i < list.size(); i++) {
+            Log.d("title n° " + i, list.get(i).getTitleArticle());
+            Log.d("url n° " + i, list.get(i).getUrlArticle());
         }
 
         DbHelper db = new DbHelper(this);
 
         int id = db.getIDFlag(nameFlag);
         Log.d("flag-id", Integer.toString(id));
-        for (int i = 0; i < liste.size(); i++) {
-            liste.get(i).setIdFlagArticle(id);
-            if (db.addArticle(liste.get(i))) {
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).setIdFlagArticle(id);
+            if (db.addArticle(list.get(i))) {
                 Toast.makeText(getApplicationContext(), "the article is insert ", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getApplicationContext(), "Error article is not insert or exist ", Toast.LENGTH_SHORT).show();
@@ -220,7 +220,7 @@ public class MainActivity extends Activity {
         DbHelper db = new DbHelper(this);
         int id = db.getIDFlag(value);
         if (id == -1) {
-            if (db.addFlag(value) == true) {
+            if (db.addFlag(value)) {
                 Toast.makeText(getApplicationContext(), "Insert perfect", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getApplicationContext(), "error of insert", Toast.LENGTH_SHORT).show();
@@ -257,28 +257,4 @@ public class MainActivity extends Activity {
             Toast.makeText(getApplicationContext(), "the table is empty", Toast.LENGTH_LONG).show();
         }
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
 }
