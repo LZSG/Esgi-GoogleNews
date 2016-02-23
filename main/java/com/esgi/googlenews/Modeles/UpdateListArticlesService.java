@@ -4,7 +4,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -61,7 +60,7 @@ public class UpdateListArticlesService extends Service
      */
     private ArrayList<Flag> getAllFlags ()
     {
-        MyDbHelper dbHelper = new MyDbHelper(this);
+        DbHelper dbHelper = new DbHelper(this);
         return dbHelper.getAllFlags();
     }
 
@@ -79,7 +78,7 @@ public class UpdateListArticlesService extends Service
         }
         ArrayList<Article> list = dataParse.getListArticle();
 
-        MyDbHelper db = new MyDbHelper(this);
+        DbHelper db = new DbHelper(this);
 
         int id = db.getIDFlag(nameFlag);
         for (int i = 0; i < list.size(); i++) {

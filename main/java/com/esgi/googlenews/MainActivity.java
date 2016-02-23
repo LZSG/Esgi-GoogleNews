@@ -31,7 +31,7 @@ import java.util.concurrent.ExecutionException;
 import com.esgi.googlenews.Modeles.Article;
 import com.esgi.googlenews.Modeles.DownloadPicture;
 import com.esgi.googlenews.Modeles.Flag;
-import com.esgi.googlenews.Modeles.MyDbHelper;
+import com.esgi.googlenews.Modeles.DbHelper;
 import com.esgi.googlenews.Modeles.UpdateListArticlesService;
 import com.esgi.googlenews.Modeles.ParsingData;
 
@@ -84,7 +84,7 @@ public class MainActivity extends Activity {
     public void FlagListView() {
         ListView lsv = (ListView) findViewById(R.id.listView);
         lsv.setAdapter(null);
-        MyDbHelper dbHelp = new MyDbHelper(this);
+        DbHelper dbHelp = new DbHelper(this);
         ArrayList<Flag> listFlag = dbHelp.getAllFlags();
         ArrayAdapter<Flag> adapter;
 
@@ -176,7 +176,7 @@ public class MainActivity extends Activity {
 
     public ArrayList<Article> getArticleFromDb(String value) {
 
-        MyDbHelper db = new MyDbHelper(this);
+        DbHelper db = new DbHelper(this);
         int id = db.getIDFlag(value);
         if (id == -1) {
             return null;
@@ -201,7 +201,7 @@ public class MainActivity extends Activity {
             Log.d("url n° " + i, liste.get(i).getUrlArticle());
         }
 
-        MyDbHelper db = new MyDbHelper(this);
+        DbHelper db = new DbHelper(this);
 
         int id = db.getIDFlag(nameFlag);
         Log.d("flag-id", Integer.toString(id));
@@ -217,7 +217,7 @@ public class MainActivity extends Activity {
 
 
     public void add(String value) {
-        MyDbHelper db = new MyDbHelper(this);
+        DbHelper db = new DbHelper(this);
         int id = db.getIDFlag(value);
         if (id == -1) {
             if (db.addFlag(value) == true) {
@@ -234,7 +234,7 @@ public class MainActivity extends Activity {
      *
      */
     public void display() {
-        MyDbHelper db = new MyDbHelper(this);
+        DbHelper db = new DbHelper(this);
         ArrayList<Flag> listeAllFlags = db.getAllFlags();
         if (listeAllFlags == null) {
             Toast.makeText(getApplicationContext(), "the table is empty", Toast.LENGTH_SHORT).show();
@@ -250,7 +250,7 @@ public class MainActivity extends Activity {
      *
      */
     public void cleanFlag() {
-        MyDbHelper db = new MyDbHelper(this);
+        DbHelper db = new DbHelper(this);
         if (db.cleanFlag() == true) {
             Toast.makeText(getApplicationContext(), "all is clean", Toast.LENGTH_LONG).show();
         } else {

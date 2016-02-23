@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import com.esgi.googlenews.Modeles.Article;
 import com.esgi.googlenews.Modeles.DownloadPicture;
-import com.esgi.googlenews.Modeles.MyDbHelper;
+import com.esgi.googlenews.Modeles.DbHelper;
 import com.esgi.googlenews.Modeles.ParsingData;
 
 public class ArticlesPrintActivity extends AppCompatActivity {
@@ -151,7 +151,7 @@ public class ArticlesPrintActivity extends AppCompatActivity {
 
     public ArrayList<Article> getArticleFromdb(String value){
 
-        MyDbHelper db = new MyDbHelper(this);
+        DbHelper db = new DbHelper(this);
         int id = db.getIDFlag(value);
         if(id==-1)
         {
@@ -173,7 +173,7 @@ public class ArticlesPrintActivity extends AppCompatActivity {
         ArrayList<Article> liste = dataParse.getListArticle();
 
 
-        MyDbHelper db = new MyDbHelper(this);
+        DbHelper db = new DbHelper(this);
 
         int id = db.getIDFlag(nameFlag);
         Log.d("flag-id", Integer.toString(id));

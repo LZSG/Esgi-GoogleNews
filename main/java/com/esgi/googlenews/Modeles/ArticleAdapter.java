@@ -81,7 +81,7 @@ public class ArticleAdapter extends ArrayAdapter
 
         ArticleDataProvider dataProvider;
         dataProvider = (ArticleDataProvider) this.getItem(position);
-        handler.poster.setImageBitmap(dataProvider.getArticle_poster_ressource());
+        handler.poster.setImageBitmap(dataProvider.getArticle_poster_resource());
         handler.title.setText(dataProvider.getArticle_title());
         handler.rating.setText(dataProvider.getArticle_rating());
 

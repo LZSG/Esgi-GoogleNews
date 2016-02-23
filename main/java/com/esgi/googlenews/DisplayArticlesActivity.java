@@ -32,7 +32,7 @@ import com.esgi.googlenews.Modeles.Article;
 import com.esgi.googlenews.Modeles.ArticleAdapter;
 import com.esgi.googlenews.Modeles.ArticleDataProvider;
 import com.esgi.googlenews.Modeles.DownloadPicture;
-import com.esgi.googlenews.Modeles.MyDbHelper;
+import com.esgi.googlenews.Modeles.DbHelper;
 import com.esgi.googlenews.Modeles.ParsingData;
 
 public class DisplayArticlesActivity extends AppCompatActivity {
@@ -128,7 +128,7 @@ public class DisplayArticlesActivity extends AppCompatActivity {
 
     // use for get the url
     private String getArticleUrl(String title){
-        MyDbHelper db = new MyDbHelper(this);
+        DbHelper db = new DbHelper(this);
         try{
          if(db.getUrlArticle(title)==null){
              return null;
@@ -144,7 +144,7 @@ public class DisplayArticlesActivity extends AppCompatActivity {
     // use for get All the articles
     private ArrayList<Article> getArticleFromdb(String value){
 
-        MyDbHelper db = new MyDbHelper(this);
+        DbHelper db = new DbHelper(this);
         int id = db.getIDFlag(value);
         if(id==-1)
         {
@@ -232,7 +232,7 @@ public class DisplayArticlesActivity extends AppCompatActivity {
         ArrayList<Article> liste = dataParse.getListArticle();
 
 
-        MyDbHelper db = new MyDbHelper(this);
+        DbHelper db = new DbHelper(this);
 
         int id = db.getIDFlag(nameFlag);
         Log.d("flag-id", Integer.toString(id));

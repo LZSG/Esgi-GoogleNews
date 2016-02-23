@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.esgi.googlenews.Modeles.MyDbHelper;
+import com.esgi.googlenews.Modeles.DbHelper;
 
 public class GoOrDeleteActivity extends AppCompatActivity {
 
@@ -54,7 +54,7 @@ public class GoOrDeleteActivity extends AppCompatActivity {
 
 
     private Boolean deleteArticles(String value){
-        MyDbHelper dbh = new MyDbHelper(this);
+        DbHelper dbh = new DbHelper(this);
         if(dbh.deleteArticlesAndFlag(value)) {
             return true;
         }
