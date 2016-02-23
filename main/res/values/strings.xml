@@ -1,10 +1,20 @@
 <resources>
     <string name="app_name">GoogleNews</string>
-    <string name="last_news">last news</string>
-    <string name="news">news</string>
-    <string name="tag">tag</string>
-    <string name="refresh">refresh</string>
-    <string name="settings">Settings</string>
 
-    <string name="set_first_tag">set your first tag</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="idSaisie">Veuillez saisir votre flag</string>
+    <string name="title_activity_ihm">ihmActivity</string>
+    <string name="title_activity_articles_print">ArticlesPrint</string>
+    <string name="title_activity_display_articles">DisplayArticles</string>
+    <string-array name="movie_title">
+        <item>pic1</item>
+        <item>pic2</item>
+        <item>pic3</item>
+        <item>pic4</item>
+    </string-array>
+    <string name="title_activity_choose">choose</string>
+    <string name="title_activity_internet_read">InternetRead</string>
+    <string name="title_activity_internet_read_off_line">InternetReadOffLine</string>
+    <string name="title_activity_go_or_delete">GoOrDelete</string>
 </resources>

@@ -1,53 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.esgi.googlenews">
+    package="com.esgi.googlenews" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
-            android:name=".LastNewsActivity"
-            android:label="">
+            android:name="com.esgi.googlenews.MainActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".RefreshActivity"
-            android:label="">
+            android:name="com.esgi.googlenews.Modeles.ihmActivity"
+            android:label="@string/title_activity_ihm" >
+        </activity>
+        <activity
+            android:name="com.esgi.googlenews.ArticlesPrint"
+            android:label="@string/title_activity_articles_print" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="com.scytec.datamobile.vd.gui.android.AppPreferenceActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".NewsActivity"
-            android:label="">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name="com.esgi.googlenews.DisplayArticles"
+            android:label="@string/title_activity_display_articles" >
         </activity>
         <activity
-            android:name=".TagActivity"
-            android:label="">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name="com.esgi.googlenews.choose"
+            android:label="@string/title_activity_choose" >
         </activity>
         <activity
-            android:name=".SettingsActivity"
-            android:label="">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name="com.esgi.googlenews.InternetRead"
+            android:label="@string/title_activity_internet_read" >
         </activity>
+        <activity
+            android:name="com.esgi.googlenews.InternetReadOffLine"
+            android:label="@string/title_activity_internet_read_off_line" >
+        </activity>
+        <activity
+            android:name="com.esgi.googlenews.GoOrDelete"
+            android:label="@string/title_activity_go_or_delete" >
+        </activity>
+        <service android:name="com.esgi.googlenews.Modeles.MyService" />
     </application>
 
 </manifest>

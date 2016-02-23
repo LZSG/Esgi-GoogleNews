@@ -5,7 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -45,7 +50,34 @@ public class MyDbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
-    
+
+
+    /*
+    *
+    * Delete articles
+    *
+    * */
+    public Boolean deleteArticlesAndFlag(String name){
+        if(name==null){
+            return false;
+        }
+        int idFlag=this.getIDFlag(name);
+        if(idFlag==-1){
+            return false;
+        }else{
+            if(this.deleteAllArticle(idFlag)){
+                if(this.deleteFlag(idFlag)>0){
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                this.deleteFlag(idFlag);
+                return false;
+            }
+        }
+
+    }
 
     /*
     *
@@ -171,10 +203,15 @@ public class MyDbHelper extends SQLiteOpenHelper {
     }
 
     public Boolean deleteAllArticle(int id){
-        SQLiteDatabase db = this.getWritableDatabase();
-        if (db.delete(DATABASE_TABLE_FLAG, " "+ID_FLAG_ARTICLE+"=?",new String[]{String.valueOf(id)})==0)
-            return false;
-        return true;
+       try {
+           SQLiteDatabase db = this.getWritableDatabase();
+           if (db.delete(DATABASE_TABLE_Article, " " + ID_FLAG_ARTICLE + "=?", new String[]{String.valueOf(id)}) == 0)
+               return false;
+           return true;
+       }catch(Exception e){
+           e.printStackTrace();
+       }
+        return false;
     }
 
 
@@ -211,6 +248,22 @@ public class MyDbHelper extends SQLiteOpenHelper {
         return idArticle;
     }
 
+
+    public String getUrlArticle(String titleArticle){
+        String url;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cur = db.rawQuery("select "+URL_ARTICLE+" from " + DATABASE_TABLE_Article + " where titleArticle = '" + titleArticle + "'", null);
+        if(cur.getCount()>0){
+            cur.moveToFirst();
+            do{
+                url  = cur.getString(cur.getColumnIndex(URL_ARTICLE));
+            }while(cur.moveToNext());
+        }else{
+            return null;
+        }
+        return url;
+    }
+
     public ArrayList<Article> getListArticle(int fid){
         ArrayList<Article> listeArr = new ArrayList<>();
         int idArticle,fidFlag,downloadPicture;
@@ -237,5 +290,33 @@ public class MyDbHelper extends SQLiteOpenHelper {
 
         return null;
     }
+
+
+    // if null so erreur
+    public ArrayList<ArticleModel> getListModel(ArrayList<Article> listes,Context context){
+        ArrayList<ArticleModel> listeModel = new ArrayList<>();
+        try{
+                for(int i = 0;i<listes.size();i++){
+                    File file = context.getFileStreamPath(listes.get(i).getIdArticle() + ".png");
+                    if(file.exists()){
+                        Bitmap bitmap=null;
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                        try {
+                            bitmap = BitmapFactory.decodeStream(new FileInputStream(file), null, options);
+                            listeModel.add(new ArticleModel(bitmap,listes.get(i).getTitleArticle(),listes.get(i).getContentArticle()));
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            return listeModel;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 
 }
