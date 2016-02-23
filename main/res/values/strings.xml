@@ -3,6 +3,12 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_manual_update">Mise à jour</string>
+
+    <string name="hint_flag">Ajouter un Tag</string>
+    <string name="tag_list">Liste des Tag</string>
+
+    <string name="button_add">Ajouter</string>
     <string name="idSaisie">Veuillez saisir votre flag</string>
     <string name="title_activity_ihm">ihmActivity</string>
     <string name="title_activity_articles_print">ArticlesPrint</string>
