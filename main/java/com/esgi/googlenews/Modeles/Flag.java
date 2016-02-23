@@ -1,59 +1,72 @@
 package com.esgi.googlenews.Modeles;
 
 /**
- * Created by zaafranigabriel on 21/01/2016.
+ * Flag object
  */
-public class Flag {
-
+public class Flag
+{
     private int id;
     private String name;
-    private MyDbHelper db;
 
-
-
-
-    public Flag(int id, String name) {
+    /**
+     *
+     * @param id
+     * @param name
+     */
+    public Flag (int id, String name)
+    {
         this.id = id;
         this.name = name;
     }
 
-    public Flag(){
-
+    /**
+     * Get Name
+     *
+     * @return name string
+     */
+    public String getName ()
+    {
+        return name;
     }
 
-    public Flag(String name)
+    /**
+     * Set Name
+     *
+     * @param name string
+     */
+    public void setName (String name)
     {
         this.name = name;
     }
 
-    public Flag(MyDbHelper db){
-        this.db = db;
-    }
-
-
-
-    public Flag getFlag(){
-        return this;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getId() {
+    /**
+     * Get id
+     *
+     * @return id int
+     */
+    public int getId ()
+    {
         return id;
     }
 
-    public void setId(int id) {
+    /**
+     * Set id
+     *
+     * @param id int
+     */
+    public void setId (int id)
+    {
         this.id = id;
     }
 
+    /**
+     * toString
+     *
+     * @return Tag name string
+     */
     @Override
-    public String toString() {
+    public String toString ()
+    {
         return name;
     }
 }
